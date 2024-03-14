@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2021 LiteKite Startup. All rights reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:keyHeight="50dp"
+    app:keyWidth="8.0%p"
+    app:keyVerticalGap="0.6%p"
+    app:keyHorizontalGap="1%p"
+    tools:ignore="UnusedResources">
+
+    <Row>
+        <Key
+            app:keyEdgeFlags="left"
+            app:keyLabel="й"
+            app:popupCharacters="1"/>
+        <Key
+            app:keyLabel="ц"
+            app:popupCharacters="2"/>
+        <Key
+            app:keyLabel="у"
+            app:popupCharacters="3"/>
+        <Key
+            app:keyLabel="к"
+             app:popupCharacters="4"/>
+        <Key
+            app:keyLabel="е"
+            app:popupCharacters="5"/>
+        <Key
+            app:keyLabel="н"
+            app:popupCharacters="6"/>
+        <Key
+            app:keyLabel="г"
+            app:popupCharacters="7"/>
+        <Key
+            app:keyLabel="ш"
+            app:popupCharacters="8"/>
+        <Key
+            app:keyLabel="щ"
+            app:popupCharacters="9"/>
+        <Key
+            app:keyLabel="з"
+            app:popupCharacters="0"/>
+        <Key
+            app:keyLabel="х" />
+    </Row>
+
+    <Row>
+        <Key
+            app:keyLabel="ф" />
+        <Key
+            app:keyLabel="ы" />
+        <Key
+            app:keyLabel="в" />
+        <Key
+            app:keyLabel="а" />
+        <Key
+            app:keyLabel="п" />
+        <Key
+            app:keyLabel="р" />
+        <Key
+            app:keyLabel="о" />
+        <Key
+            app:keyLabel="л" />
+        <Key
+            app:keyLabel="д" />
+        <Key
+            app:keyLabel="ж" />
+        <Key
+            app:keyLabel="э" />
+    </Row>
+
+    <Row>
+        <Key
+            app:codes="@integer/keycode_shift"
+            app:isModifier="true"
+            app:isSticky="true"
+            app:keyEdgeFlags="left"
+            app:keyIcon="@drawable/ic_keyboard_key_shift" />
+        <Key
+            app:keyLabel="я" />
+        <Key
+            app:keyLabel="ч" />
+        <Key
+            app:keyLabel="с" />
+        <Key
+            app:keyLabel="м" />
+        <Key
+            app:keyLabel="и" />
+        <Key
+            app:keyLabel="т" />
+        <Key
+            app:keyLabel="ь"
+            app:popupCharacters="@string/alternates_for_n"/>
+        <Key
+            app:keyLabel="б" />
+        <Key
+            app:keyLabel="ю" />
+        <Key
+            app:codes="@integer/keycode_delete"
+            app:isRepeatable="true"
+            app:keyEdgeFlags="right"
+            app:keyIcon="@drawable/ic_keyboard_key_backspace" />
+    </Row>
+
+    <Row>
+        <Key
+            app:codes="@integer/keycode_mode_change"
+            app:keyEdgeFlags="left"
+            app:keyWidth="17%p"
+            app:keyIcon="@drawable/ic_keyboard_key_symbol" />
+        <Key
+            app:keyLabel="/"
+            app:keyWidth="8%p" />
+        <Key
+            app:codes="@integer/keycode_space"
+            app:keyLabel="@string/ru_language"
+            app:keyWidth="44%p" />
+        <Key
+            app:keyLabel="."
+            app:keyWidth="8%p" />
+        <Key
+            app:codes="@integer/keycode_enter"
+            app:keyEdgeFlags="right"
+            app:keyWidth="17%p"
+            app:keyIcon="@drawable/ic_keyboard_key_enter" />
+    </Row>
+
+</Keyboard>
