@@ -18,7 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/keyboard_key_size"
-    android:layout_height="50dp"
+    android:layout_height="@dimen/keyboard_key_size_height"
     android:background="@drawable/bg_keyboard_key">
 
     <com.google.android.material.textview.MaterialTextView

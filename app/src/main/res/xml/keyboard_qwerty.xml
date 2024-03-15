@@ -16,7 +16,7 @@
 -->
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:keyHeight="50dp"
+    app:keyHeight="@dimen/keyboard_key_size_height"
     app:keyWidth="8.0%p"
     app:keyVerticalGap="0.6%p"
     app:keyHorizontalGap="1%p"
