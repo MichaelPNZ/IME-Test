@@ -15,6 +15,7 @@
  */
 package com.litekite.ime.service
 
+import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.os.LocaleList
 import android.view.LayoutInflater
@@ -90,6 +91,11 @@ class ImeService : InputMethodService(), ConfigController.Callback {
         // Recreate all the keyboard layouts to reflect theme change
         parseKeyboardLayoutFromXml()
         binding.vKeyboard.setKeyboard(qwertyKeyboard)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        configController.onConfigChanged(newConfig)
+        super.onConfigurationChanged(newConfig)
     }
 
     override fun onDeviceOrientationChanged() {
