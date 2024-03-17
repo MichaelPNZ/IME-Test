@@ -67,7 +67,12 @@ class KeyboardView @JvmOverloads constructor(
 
         private const val REPEAT_KEY_DELAY = 50L // ~20 keys per second
         private const val REPEAT_KEY_START_DELAY = 400L
+
+        private const val DOUBLE_TAP_DELAY = 400L
     }
+
+    private var lastKeyClickTimeMillis = 0L
+    private var lastKeyClicked: Keyboard.Key? = null
 
     private var count = 0
     private val keyBackground: Drawable?
@@ -247,6 +252,22 @@ class KeyboardView @JvmOverloads constructor(
     }
 
     /**
+     * Sets the force state of the shift key of the keyboard, if any.
+     * @param shifted whether or not to enable the state of the shift key
+     * @return true if the shift key state changed, false if there was no change
+     * @see isShifted
+     */
+    fun setForceShifted(shifted: Boolean): Boolean {
+        val keyboard = this.keyboard ?: return false
+        if (keyboard.setForceShifted(shifted)) {
+            // The whole keyboard probably needs to be redrawn
+            invalidateAllKeys()
+            return true
+        }
+        return false
+    }
+
+    /**
      * Returns the state of the shift key of the keyboard, if any.
      * @return true if the shift is in a pressed state, false otherwise. If there is
      * no shift key on the keyboard or there is no keyboard attached, it returns false.
@@ -254,6 +275,10 @@ class KeyboardView @JvmOverloads constructor(
      */
     fun isShifted(): Boolean {
         return keyboard?.isShifted ?: return false
+    }
+
+    fun isForceShifted(): Boolean {
+        return keyboard?.isForceShifted ?: return false
     }
 
     fun getLocale(): Locale = resources.configuration.locales[0]
@@ -362,9 +387,11 @@ class KeyboardView @JvmOverloads constructor(
                 Character.isLetterOrDigit(keyLabel[0]) -> {
                     keyTextColorPrimary
                 }
+
                 useKeyTextColorSecondary -> {
                     keyTextColorSecondary
                 }
+
                 else -> {
                     keyTextColorPrimary
                 }
@@ -626,7 +653,8 @@ class KeyboardView @JvmOverloads constructor(
                     if (!currentKey.isRepeatable && !keyPopupCharsWindow.isShowing) {
                         sendKeyEvent()
                     }
-                    if (count >= 1) {
+
+                    if (count >= 1 && !isForceShifted()) {
                         count = 0
                         setShifted(false)
                     }
@@ -647,7 +675,19 @@ class KeyboardView @JvmOverloads constructor(
         }
         val keyboard = this.keyboard ?: return
         val key = keyboard.keys[currentKeyIndex]
-        callbacks.forEach { it.onKey(key.codes[0]) }
+
+        val clickTime = System.currentTimeMillis()
+        if (key == lastKeyClicked
+            && !key.isRepeatable
+            && clickTime - lastKeyClickTimeMillis < DOUBLE_TAP_DELAY
+        ) {
+            callbacks.forEach { it.onDoubleKey(key.codes[0]) }
+        } else {
+            callbacks.forEach { it.onKey(key.codes[0]) }
+        }
+        lastKeyClickTimeMillis = clickTime
+        lastKeyClicked = key
+
     }
 
     private fun removeCallbacks() {
@@ -677,6 +717,8 @@ class KeyboardView @JvmOverloads constructor(
          * @param primaryCode this is the key that was pressed
          */
         fun onKey(primaryCode: Int)
+
+        fun onDoubleKey(primaryCode: Int)
 
         /**
          * Called when we want to stop keyboard input.

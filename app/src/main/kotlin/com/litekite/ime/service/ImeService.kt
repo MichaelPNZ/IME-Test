@@ -18,6 +18,7 @@ package com.litekite.ime.service
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.os.LocaleList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -67,6 +68,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
     init {
         ImeApp.printLog(TAG, "init:")
+        Log.d("!!!", "ImeService init ")
     }
 
     override fun onCreate() {
@@ -94,8 +96,8 @@ class ImeService : InputMethodService(), ConfigController.Callback {
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-        configController.onConfigChanged(newConfig)
         super.onConfigurationChanged(newConfig)
+        configController.onConfigChanged(newConfig)
     }
 
     override fun onDeviceOrientationChanged() {
@@ -158,7 +160,9 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 Keyboard.KEYCODE_SHIFT -> {
                     // Toggle Capitalization
                     binding.vKeyboard.setShifted(!binding.vKeyboard.isShifted())
+                    binding.vKeyboard.setForceShifted(false)
                 }
+
                 Keyboard.KEYCODE_MODE_CHANGE -> {
                     if (binding.vKeyboard.keyboard === qwertyKeyboard) {
                         binding.vKeyboard.setKeyboard(symbolKeyboard)
@@ -229,6 +233,13 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 }
             }
             audioController.playSoundEffect()
+        }
+
+        override fun onDoubleKey(primaryCode: Int) {
+            if (primaryCode == Keyboard.KEYCODE_SHIFT) {
+                binding.vKeyboard.setForceShifted(true)
+            }
+
         }
 
         override fun onStopInput() {
