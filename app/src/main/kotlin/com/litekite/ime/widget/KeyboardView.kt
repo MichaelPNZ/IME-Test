@@ -71,7 +71,6 @@ class KeyboardView @JvmOverloads constructor(
     }
 
     private var lastKeyClickTimeMillis = 0L
-    private var lastKeyClicked: Keyboard.Key? = null
 
     private var count = 0
     private val keyBackground: Drawable?
@@ -669,7 +668,6 @@ class KeyboardView @JvmOverloads constructor(
             callbacks.forEach { it.onKey(key.codes[0]) }
         }
         lastKeyClickTimeMillis = clickTime
-        lastKeyClicked = key
 
     }
 
