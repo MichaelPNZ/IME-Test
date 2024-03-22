@@ -160,7 +160,7 @@ class ImeService : InputMethodService(), ConfigController.Callback {
                 Keyboard.KEYCODE_SHIFT -> {
                     // Toggle Capitalization
                     binding.vKeyboard.setShifted(!binding.vKeyboard.isShifted())
-                    binding.vKeyboard.setForceShifted(false)
+                    binding.vKeyboard.keyboard?.isForced = false
                 }
 
                 Keyboard.KEYCODE_MODE_CHANGE -> {
@@ -237,7 +237,8 @@ class ImeService : InputMethodService(), ConfigController.Callback {
 
         override fun onDoubleKey(primaryCode: Int) {
             if (primaryCode == Keyboard.KEYCODE_SHIFT) {
-                binding.vKeyboard.setForceShifted(true)
+                binding.vKeyboard.keyboard?.isForced = true
+                binding.vKeyboard.setShifted(true)
             }
 
         }

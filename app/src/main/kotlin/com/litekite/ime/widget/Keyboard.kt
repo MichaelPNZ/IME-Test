@@ -161,7 +161,7 @@ class Keyboard(context: Context, layoutRes: Int) {
      */
     internal var isShifted = false
 
-    internal var isForceShifted = false
+    internal var isForced = false
 
     /**
      * Key instance for the shift key, if present
@@ -301,28 +301,12 @@ class Keyboard(context: Context, layoutRes: Int) {
     }
 
     fun setShifted(shiftState: Boolean): Boolean {
-        if(isForceShifted) return false
         for (shiftKey in shiftKeys) {
             if (shiftKey != null) {
                 shiftKey.isOn = shiftState
+                isShifted = shiftState
+                return true
             }
-        }
-        if (isShifted != shiftState) {
-            isShifted = shiftState
-            return true
-        }
-        return false
-    }
-
-    fun setForceShifted(shiftState: Boolean): Boolean {
-        for (shiftKey in shiftKeys) {
-            if (shiftKey != null) {
-                shiftKey.isOn = shiftState
-            }
-        }
-        if (isForceShifted != shiftState) {
-            isForceShifted = shiftState
-            return true
         }
         return false
     }
