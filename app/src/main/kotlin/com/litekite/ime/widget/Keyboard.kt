@@ -300,11 +300,11 @@ class Keyboard(context: Context, layoutRes: Int) {
         return NOT_A_KEY
     }
 
-    fun setShifted(shiftState: Boolean): Boolean {
+    fun setShifted(isShiftedState: Boolean): Boolean {
         for (shiftKey in shiftKeys) {
             if (shiftKey != null) {
-                shiftKey.isOn = shiftState
-                isShifted = shiftState
+                shiftKey.isOn = isShiftedState
+                isShifted = isShiftedState
                 return true
             }
         }

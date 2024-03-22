@@ -234,14 +234,14 @@ class KeyboardView @JvmOverloads constructor(
 
     /**
      * Sets the state of the shift key of the keyboard, if any.
-     * @param shifted whether or not to enable the state of the shift key
+     * @param isShifted whether or not to enable the state of the shift key
      * @return true if the shift key state changed, false if there was no change
      * @see isShifted
      */
 
-    fun setShifted(shifted: Boolean): Boolean {
+    fun setShifted(isShifted: Boolean): Boolean {
         val keyboard = this.keyboard ?: return false
-        if (keyboard.setShifted(shifted)) {
+        if (keyboard.setShifted(isShifted)) {
             // The whole keyboard probably needs to be redrawn
             invalidateAllKeys()
             return true
@@ -668,7 +668,6 @@ class KeyboardView @JvmOverloads constructor(
             callbacks.forEach { it.onKey(key.codes[0]) }
         }
         lastKeyClickTimeMillis = clickTime
-
     }
 
     private fun removeCallbacks() {
